@@ -1,0 +1,74 @@
+application {
+  config {
+    baseName intentApp
+    packageName com.example.intent
+    applicationType monolith
+    authenticationType jwt
+    prodDatabaseType postgresql
+    buildTool maven
+    clientFramework angular
+  }
+  entities *
+}
+
+enum CouponType {
+  PERCENT,
+  FIXED
+}
+
+entity Article {
+  id UUID required
+  price BigDecimal required
+}
+
+entity User {
+  id UUID required
+  phone String required maxlength(10)
+  email String required
+  rdinUserId String
+}
+
+entity StoreManager {
+  id UUID required
+  name String
+}
+
+entity Store {
+  id UUID required
+  name String
+}
+
+entity Coupon {
+  id String required
+  text String
+  type CouponType
+  value BigDecimal
+}
+
+entity RDCheckout {
+  id String required
+  status String
+  paymentStatus String
+  orderId String
+  orderDeliveryStatus String
+}
+
+entity Intent {
+  id UUID required
+  commission BigDecimal
+  createdTime Instant required
+  createdBy String
+  updatedTime Instant
+  updatedBy String
+}
+
+relationship ManyToOne {
+  Intent{article} to Article
+  Intent{user} to User
+  Intent{storeManager} to StoreManager
+  Intent{store} to Store
+  Intent{coupon} to Coupon
+  Intent{rdCheckout} to RDCheckout
+}
+
+
