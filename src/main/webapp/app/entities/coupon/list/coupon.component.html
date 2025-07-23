@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="CouponHeading">
+    <span jhiTranslate="intentApp.coupon.home.title">Coupons</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="intentApp.coupon.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-coupon"
+        [routerLink]="['/coupon/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="intentApp.coupon.home.createLabel">Create a new Coupon</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (coupons().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="intentApp.coupon.home.notFound">No Coupons found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.coupon.id">Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="text">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.coupon.text">Text</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.coupon.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="value">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.coupon.value">Value</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (coupon of coupons(); track trackId(coupon)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/coupon', coupon.id, 'view']">{{ coupon.id }}</a>
+              </td>
+              <td>{{ coupon.text }}</td>
+              <td [jhiTranslate]="'intentApp.CouponType.' + (coupon.type ?? 'null')">
+                {{ { null: '', PERCENT: 'PERCENT', FIXED: 'FIXED' }[coupon.type ?? 'null'] }}
+              </td>
+              <td>{{ coupon.value }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/coupon', coupon.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/coupon', coupon.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(coupon)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

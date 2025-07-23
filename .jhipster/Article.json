@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20250723142617"
+  },
+  "applications": ["intentApp"],
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Article",
+  "relationships": [],
+  "searchEngine": "no"
+}

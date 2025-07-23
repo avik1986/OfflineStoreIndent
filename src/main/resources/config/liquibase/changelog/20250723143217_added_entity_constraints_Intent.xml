@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Intent.
+    -->
+    <changeSet id="20250723143217-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="store_manager_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__store_manager_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store_manager"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__store_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="coupon_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__coupon_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="coupon"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="rd_checkout_id"
+                                 baseTableName="intent"
+                                 constraintName="fk_intent__rd_checkout_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rd_checkout"
+                                 />
+    </changeSet>
+</databaseChangeLog>

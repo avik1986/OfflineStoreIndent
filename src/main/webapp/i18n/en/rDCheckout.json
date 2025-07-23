@@ -1,0 +1,27 @@
+{
+  "intentApp": {
+    "rDCheckout": {
+      "home": {
+        "title": "RD Checkouts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new RD Checkout",
+        "createOrEditLabel": "Create or edit a RD Checkout",
+        "notFound": "No RD Checkouts found"
+      },
+      "created": "A new RD Checkout is created with identifier {{ param }}",
+      "updated": "A RD Checkout is updated with identifier {{ param }}",
+      "deleted": "A RD Checkout is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete RD Checkout {{ id }}?"
+      },
+      "detail": {
+        "title": "RD Checkout"
+      },
+      "id": "Id",
+      "status": "Status",
+      "paymentStatus": "Payment Status",
+      "orderId": "Order Id",
+      "orderDeliveryStatus": "Order Delivery Status"
+    }
+  }
+}

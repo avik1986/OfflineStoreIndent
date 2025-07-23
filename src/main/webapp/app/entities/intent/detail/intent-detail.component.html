@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (intent(); as intentRef) {
+      <div>
+        <h2 data-cy="intentDetailsHeading"><span jhiTranslate="intentApp.intent.detail.title">Intent</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="intentApp.intent.id">Id</span></dt>
+          <dd>
+            <span>{{ intentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.commission">Commission</span></dt>
+          <dd>
+            <span>{{ intentRef.commission }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.createdTime">Created Time</span></dt>
+          <dd>
+            <span>{{ intentRef.createdTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.createdBy">Created By</span></dt>
+          <dd>
+            <span>{{ intentRef.createdBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.updatedTime">Updated Time</span></dt>
+          <dd>
+            <span>{{ intentRef.updatedTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.updatedBy">Updated By</span></dt>
+          <dd>
+            <span>{{ intentRef.updatedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.article">Article</span></dt>
+          <dd>
+            @if (intent()!.article) {
+              <div>
+                <a [routerLink]="['/article', intent()!.article?.id, 'view']">{{ intentRef.article?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.user">User</span></dt>
+          <dd>
+            <span>{{ intentRef.user?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.storeManager">Store Manager</span></dt>
+          <dd>
+            @if (intent()!.storeManager) {
+              <div>
+                <a [routerLink]="['/store-manager', intent()!.storeManager?.id, 'view']">{{ intentRef.storeManager?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.store">Store</span></dt>
+          <dd>
+            @if (intent()!.store) {
+              <div>
+                <a [routerLink]="['/store', intent()!.store?.id, 'view']">{{ intentRef.store?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.coupon">Coupon</span></dt>
+          <dd>
+            @if (intent()!.coupon) {
+              <div>
+                <a [routerLink]="['/coupon', intent()!.coupon?.id, 'view']">{{ intentRef.coupon?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="intentApp.intent.rdCheckout">Rd Checkout</span></dt>
+          <dd>
+            @if (intent()!.rdCheckout) {
+              <div>
+                <a [routerLink]="['/rd-checkout', intent()!.rdCheckout?.id, 'view']">{{ intentRef.rdCheckout?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/intent', intentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

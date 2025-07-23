@@ -1,0 +1,190 @@
+<div>
+  <h2 id="page-heading" data-cy="IntentHeading">
+    <span jhiTranslate="intentApp.intent.home.title">Intents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="intentApp.intent.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-intent"
+        [routerLink]="['/intent/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="intentApp.intent.home.createLabel">Create a new Intent</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (intents().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="intentApp.intent.home.notFound">No Intents found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.id">Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="commission">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.commission">Commission</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdTime">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.createdTime">Created Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="createdBy">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.createdBy">Created By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedTime">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.updatedTime">Updated Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="updatedBy">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.updatedBy">Updated By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="article.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.article">Article</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="user.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="storeManager.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.storeManager">Store Manager</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="store.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.store">Store</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="coupon.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.coupon">Coupon</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="rdCheckout.id">
+              <div class="d-flex">
+                <span jhiTranslate="intentApp.intent.rdCheckout">Rd Checkout</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (intent of intents(); track trackId(intent)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/intent', intent.id, 'view']">{{ intent.id }}</a>
+              </td>
+              <td>{{ intent.commission }}</td>
+              <td>{{ intent.createdTime | formatMediumDatetime }}</td>
+              <td>{{ intent.createdBy }}</td>
+              <td>{{ intent.updatedTime | formatMediumDatetime }}</td>
+              <td>{{ intent.updatedBy }}</td>
+              <td>
+                @if (intent.article) {
+                  <div>
+                    <a [routerLink]="['/article', intent.article.id, 'view']">{{ intent.article.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                {{ intent.user?.id }}
+              </td>
+              <td>
+                @if (intent.storeManager) {
+                  <div>
+                    <a [routerLink]="['/store-manager', intent.storeManager.id, 'view']">{{ intent.storeManager.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (intent.store) {
+                  <div>
+                    <a [routerLink]="['/store', intent.store.id, 'view']">{{ intent.store.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (intent.coupon) {
+                  <div>
+                    <a [routerLink]="['/coupon', intent.coupon.id, 'view']">{{ intent.coupon.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (intent.rdCheckout) {
+                  <div>
+                    <a [routerLink]="['/rd-checkout', intent.rdCheckout.id, 'view']">{{ intent.rdCheckout.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/intent', intent.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/intent', intent.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(intent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

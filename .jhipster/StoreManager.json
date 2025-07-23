@@ -1,0 +1,20 @@
+{
+  "annotations": {
+    "changelogDate": "20250723142817"
+  },
+  "applications": ["intentApp"],
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "StoreManager",
+  "relationships": [],
+  "searchEngine": "no"
+}
