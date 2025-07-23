@@ -5,6 +5,7 @@
     "baseName": "intentApp",
     "buildTool": "maven",
     "clientFramework": "angular",
+    "creationTimestamp": 1753283668465,
     "entities": ["Article", "User", "StoreManager", "Store", "Coupon", "RDCheckout", "Intent"],
     "jhipsterVersion": "8.11.0",
     "jwtSecretKey": "YWI5YjM3NWJmOGY0NjM3Zjg0MmI5N2RlYmI1MGY3ZDZlMGMzZWIzZjdmYmFkZmM3ZDZlZGNiY2NiNTY3ZGMwYzlhOTBlODYxMGNlNDZiMzM0MjNlYTY0NDA3NWJhODY2YTY2Zjk4ZGQ4OGJiYzFkNDc4YzUwMTJiZjY3MjI0Mzk=",
