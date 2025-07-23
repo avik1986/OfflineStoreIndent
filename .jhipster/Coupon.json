@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20250723143017"
+  },
+  "applications": ["intentApp"],
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CouponType",
+      "fieldValues": "PERCENT,FIXED"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "BigDecimal"
+    }
+  ],
+  "name": "Coupon",
+  "relationships": [],
+  "searchEngine": "no"
+}

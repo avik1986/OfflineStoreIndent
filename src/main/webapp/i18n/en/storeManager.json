@@ -1,0 +1,24 @@
+{
+  "intentApp": {
+    "storeManager": {
+      "home": {
+        "title": "Store Managers",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Store Manager",
+        "createOrEditLabel": "Create or edit a Store Manager",
+        "notFound": "No Store Managers found"
+      },
+      "created": "A new Store Manager is created with identifier {{ param }}",
+      "updated": "A Store Manager is updated with identifier {{ param }}",
+      "deleted": "A Store Manager is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Store Manager {{ id }}?"
+      },
+      "detail": {
+        "title": "Store Manager"
+      },
+      "id": "Id",
+      "name": "Name"
+    }
+  }
+}

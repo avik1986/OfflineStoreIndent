@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20250723143117"
+  },
+  "applications": ["intentApp"],
+  "entityTableName": "rd_checkout",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "paymentStatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "orderDeliveryStatus",
+      "fieldType": "String"
+    }
+  ],
+  "name": "RDCheckout",
+  "relationships": [],
+  "searchEngine": "no"
+}

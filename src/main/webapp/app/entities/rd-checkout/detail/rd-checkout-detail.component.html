@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (rDCheckout(); as rDCheckoutRef) {
+      <div>
+        <h2 data-cy="rDCheckoutDetailsHeading"><span jhiTranslate="intentApp.rDCheckout.detail.title">RD Checkout</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="intentApp.rDCheckout.id">Id</span></dt>
+          <dd>
+            <span>{{ rDCheckoutRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.rDCheckout.status">Status</span></dt>
+          <dd>
+            <span>{{ rDCheckoutRef.status }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.rDCheckout.paymentStatus">Payment Status</span></dt>
+          <dd>
+            <span>{{ rDCheckoutRef.paymentStatus }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.rDCheckout.orderId">Order Id</span></dt>
+          <dd>
+            <span>{{ rDCheckoutRef.orderId }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.rDCheckout.orderDeliveryStatus">Order Delivery Status</span></dt>
+          <dd>
+            <span>{{ rDCheckoutRef.orderDeliveryStatus }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/rd-checkout', rDCheckoutRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

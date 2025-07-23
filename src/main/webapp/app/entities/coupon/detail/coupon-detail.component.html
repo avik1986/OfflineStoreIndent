@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (coupon(); as couponRef) {
+      <div>
+        <h2 data-cy="couponDetailsHeading"><span jhiTranslate="intentApp.coupon.detail.title">Coupon</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="intentApp.coupon.id">Id</span></dt>
+          <dd>
+            <span>{{ couponRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.coupon.text">Text</span></dt>
+          <dd>
+            <span>{{ couponRef.text }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.coupon.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'intentApp.CouponType.' + (couponRef.type ?? 'null')">{{
+              { null: '', PERCENT: 'PERCENT', FIXED: 'FIXED' }[couponRef.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="intentApp.coupon.value">Value</span></dt>
+          <dd>
+            <span>{{ couponRef.value }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/coupon', couponRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

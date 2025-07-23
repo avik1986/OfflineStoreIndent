@@ -1,0 +1,198 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-intent-heading" data-cy="IntentCreateUpdateHeading" jhiTranslate="intentApp.intent.home.createOrEditLabel">
+        Create or edit a Intent
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          @let idRef = editForm.get('id')!;
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="intentApp.intent.id">Id</label>
+            <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            @if (idRef.invalid && (idRef.dirty || idRef.touched)) {
+              <div>
+                @if (editForm.get('id')?.errors?.required) {
+                  <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+                }
+              </div>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_commission" jhiTranslate="intentApp.intent.commission">Commission</label>
+          <input
+            type="number"
+            class="form-control"
+            name="commission"
+            id="field_commission"
+            data-cy="commission"
+            formControlName="commission"
+          />
+        </div>
+
+        @let createdTimeRef = editForm.get('createdTime')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_createdTime" jhiTranslate="intentApp.intent.createdTime">Created Time</label>
+          <div class="d-flex">
+            <input
+              id="field_createdTime"
+              data-cy="createdTime"
+              type="datetime-local"
+              class="form-control"
+              name="createdTime"
+              formControlName="createdTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (createdTimeRef.invalid && (createdTimeRef.dirty || createdTimeRef.touched)) {
+            <div>
+              @if (editForm.get('createdTime')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('createdTime')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy" jhiTranslate="intentApp.intent.createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_updatedTime" jhiTranslate="intentApp.intent.updatedTime">Updated Time</label>
+          <div class="d-flex">
+            <input
+              id="field_updatedTime"
+              data-cy="updatedTime"
+              type="datetime-local"
+              class="form-control"
+              name="updatedTime"
+              formControlName="updatedTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_updatedBy" jhiTranslate="intentApp.intent.updatedBy">Updated By</label>
+          <input type="text" class="form-control" name="updatedBy" id="field_updatedBy" data-cy="updatedBy" formControlName="updatedBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_article" jhiTranslate="intentApp.intent.article">Article</label>
+          <select
+            class="form-control"
+            id="field_article"
+            data-cy="article"
+            name="article"
+            formControlName="article"
+            [compareWith]="compareArticle"
+          >
+            <option [ngValue]="null"></option>
+            @for (articleOption of articlesSharedCollection; track $index) {
+              <option [ngValue]="articleOption">{{ articleOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" jhiTranslate="intentApp.intent.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_storeManager" jhiTranslate="intentApp.intent.storeManager">Store Manager</label>
+          <select
+            class="form-control"
+            id="field_storeManager"
+            data-cy="storeManager"
+            name="storeManager"
+            formControlName="storeManager"
+            [compareWith]="compareStoreManager"
+          >
+            <option [ngValue]="null"></option>
+            @for (storeManagerOption of storeManagersSharedCollection; track $index) {
+              <option [ngValue]="storeManagerOption">{{ storeManagerOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_store" jhiTranslate="intentApp.intent.store">Store</label>
+          <select class="form-control" id="field_store" data-cy="store" name="store" formControlName="store" [compareWith]="compareStore">
+            <option [ngValue]="null"></option>
+            @for (storeOption of storesSharedCollection; track $index) {
+              <option [ngValue]="storeOption">{{ storeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coupon" jhiTranslate="intentApp.intent.coupon">Coupon</label>
+          <select
+            class="form-control"
+            id="field_coupon"
+            data-cy="coupon"
+            name="coupon"
+            formControlName="coupon"
+            [compareWith]="compareCoupon"
+          >
+            <option [ngValue]="null"></option>
+            @for (couponOption of couponsSharedCollection; track $index) {
+              <option [ngValue]="couponOption">{{ couponOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_rdCheckout" jhiTranslate="intentApp.intent.rdCheckout">Rd Checkout</label>
+          <select
+            class="form-control"
+            id="field_rdCheckout"
+            data-cy="rdCheckout"
+            name="rdCheckout"
+            formControlName="rdCheckout"
+            [compareWith]="compareRDCheckout"
+          >
+            <option [ngValue]="null"></option>
+            @for (rDCheckoutOption of rDCheckoutsSharedCollection; track $index) {
+              <option [ngValue]="rDCheckoutOption">{{ rDCheckoutOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "intentApp": {
+    "CouponType": {
+      "null": "",
+      "PERCENT": "PERCENT",
+      "FIXED": "FIXED"
+    }
+  }
+}
